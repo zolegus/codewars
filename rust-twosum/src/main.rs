@@ -19,3 +19,16 @@ fn two_sum(numbers: &[i32], target: i32) -> (usize, usize) {
     }
     (0,0)
 }
+
+fn two_sum_v2(numbers: &[i32], target: i32) -> (usize, usize) {
+    use std::collections::HashMap;
+    let mut map = HashMap::with_capacity(numbers.len());
+
+    for (i, &v) in numbers.iter().enumerate() {
+        match map.get(&(target - v)) {
+            Some(&idx) => return (i, idx),
+            None => map.insert(v, i),
+        };
+    }
+    unreachable!();
+}
